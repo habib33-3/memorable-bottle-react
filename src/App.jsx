@@ -1,7 +1,11 @@
+import Header from "./components/Header/Header";
+import Bottles from "./components/Bottles/Bottles";
+
 function App() {
   return (
     <>
-      <h1>hello</h1>
+      <Header></Header>
+      <Bottles></Bottles>
     </>
   );
 }
