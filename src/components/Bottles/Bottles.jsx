@@ -17,9 +17,11 @@ const Bottles = () => {
   return (
     <div className="w-max mx-auto my-3">
       <h2 className="text-2xl">Bottles Here {bottles.length}</h2>
-      {bottles.map((bottle) => {
-        return <Bottle key={bottle.id} bottle={bottle}></Bottle>;
-      })}
+      <div className="grid grid-cols-3 items-center justify-center gap-10 my-10">
+        {bottles.map((bottle) => {
+          return <Bottle key={bottle.id} bottle={bottle}></Bottle>;
+        })}
+      </div>
     </div>
   );
 };
