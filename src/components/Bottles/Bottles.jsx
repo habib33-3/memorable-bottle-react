@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Bottle from "./../Bottle/Bottle";
-import { addToLS, getStoredCart } from "../../util/localStorage";
+import { addToLS, getStoredCart, removeFromLS } from "../../util/localStorage";
 import Cart from "../Cart/Cart";
 
 const Bottles = () => {
@@ -24,6 +24,13 @@ const Bottles = () => {
     addToLS(bottle.id);
   };
 
+  const handleRemoveFromCart = (id) => {
+    const remainingCart = cart.filter((bottle) => bottle.id !== id);
+    setCart(remainingCart);
+
+    removeFromLS(id);
+  };
+
   //   Load cart local storage
   useEffect(() => {
     if (bottles.length) {
@@ -44,7 +51,7 @@ const Bottles = () => {
     <div className="w-max mx-auto my-3 flex flex-col items-center justify-center">
       <h2 className="text-2xl">Bottles Here {bottles.length}</h2>
 
-      <Cart cart={cart}></Cart>
+      <Cart cart={cart} handleRemoveFromCart={handleRemoveFromCart}></Cart>
 
       <div className="grid grid-cols-3 items-center justify-center gap-10 my-10">
         {bottles.map((bottle) => {
