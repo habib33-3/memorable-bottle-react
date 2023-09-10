@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Bottle from "./../Bottle/Bottle";
 import { addToLS, getStoredCart } from "../../util/localStorage";
+import Cart from "../Cart/Cart";
 
 const Bottles = () => {
   const [bottles, setBottles] = useState([]);
@@ -40,9 +41,11 @@ const Bottles = () => {
   }, [bottles]);
 
   return (
-    <div className="w-max mx-auto my-3">
+    <div className="w-max mx-auto my-3 flex flex-col items-center justify-center">
       <h2 className="text-2xl">Bottles Here {bottles.length}</h2>
-      <h2>Cart {cart.length}</h2>
+
+      <Cart cart={cart}></Cart>
+
       <div className="grid grid-cols-3 items-center justify-center gap-10 my-10">
         {bottles.map((bottle) => {
           return (
