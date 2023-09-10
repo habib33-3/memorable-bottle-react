@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Bottle from "./../Bottle/Bottle";
+import { addToLS, getStoredCart } from "../../util/localStorage";
 
 const Bottles = () => {
   const [bottles, setBottles] = useState([]);
@@ -19,7 +20,24 @@ const Bottles = () => {
   const handleAddToCart = (bottle) => {
     const newCart = [...cart, bottle];
     setCart(newCart);
+    addToLS(bottle.id);
   };
+
+  //   Load cart local storage
+  useEffect(() => {
+    if (bottles.length) {
+      const storedCart = getStoredCart();
+
+      const savedCart = [];
+      for (const id of storedCart) {
+        const bottle = bottles.find((bottle) => bottle.id === id);
+        if (bottle) {
+          savedCart.push(bottle);
+        }
+      }
+      setCart(savedCart);
+    }
+  }, [bottles]);
 
   return (
     <div className="w-max mx-auto my-3">
